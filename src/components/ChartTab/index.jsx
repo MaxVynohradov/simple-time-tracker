@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import {
   BarChart, Bar, CartesianGrid, Tooltip, Legend, XAxis, YAxis
 } from 'recharts';
 import { Button } from '@material-ui/core';
 
-import useStyles from './styles'
+// import useStyles from './styles'
 
 const data = [
   {
@@ -32,7 +32,7 @@ const data = [
 ];
 
 export default function ChartTab() {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   return (
     <Fragment>
