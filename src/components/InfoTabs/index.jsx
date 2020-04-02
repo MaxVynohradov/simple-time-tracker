@@ -1,61 +1,32 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { AppBar, Tabs, Tab } from '@material-ui/core';
+import { AppBar, Tabs } from '@material-ui/core';
 
 import useStyles from './styles'
+import useTabsWithRouter from './useTabsWithRouter'
 import ChartTab from '../ChartTab'
 import TableTab from '../TableTab'
+import TabPanel from './TabPanel'
+import TabLink from './TabLink'
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
 
-  return (
-    <div
-      component="div"
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      {...other}
-    >
-      {children}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
-
+// https://github.com/mui-org/material-ui/issues/18811
 export default function SimpleTabs() {
+  const tabValue = useTabsWithRouter(['/tasks', '/chart'], '/tasks');
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
+  
   return (
     <div className={classes.infoTabsContainer}>
-      <AppBar position="static">
-        <Tabs variant="fullWidth" value={value} onChange={handleChange}>
-          <Tab label="TASKS LOG" {...a11yProps(0)} />
-          <Tab label="TASKS CHART" {...a11yProps(1)} />
+      <AppBar position="static"> 
+        <Tabs variant="fullWidth" value={tabValue}>
+          <TabLink value="/tasks" label="TASKS LOG" />
+          <TabLink value="/chart" label="TASKS CHART" />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
-        <TableTab/>
+      <TabPanel value={tabValue} index="/tasks">
+        <TableTab />
       </TabPanel>
-      <TabPanel value={value} index={1}>
-        <ChartTab/>
+      <TabPanel value={tabValue} index="/chart">
+        <ChartTab />
       </TabPanel>
     </div>
   );
