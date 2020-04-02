@@ -5,7 +5,7 @@ import {
 } from 'recharts';
 import { Button } from '@material-ui/core';
 
-// import useStyles from './styles'
+import useStyles from './styles'
 
 const data = [
   {
@@ -32,10 +32,10 @@ const data = [
 ];
 
 export default function ChartTab() {
-  // const classes = useStyles();
+  const classes = useStyles();
 
   return (
-    <Fragment>
+    <div className={classes.chartContainer}>
       <BarChart
         width={950}  // calc dynamicly
         height={400}
@@ -51,9 +51,7 @@ export default function ChartTab() {
         <Legend />
         <Bar dataKey="minutes" fill="#3f51b5" />
       </BarChart>
-      <div className="generate">
-        <Button variant="contained" onClick={() => { }}>GENERATE</Button>
-      </div>
-    </Fragment>
+      <Button color="primary" size="large" className={classes.generateButton} onClick={() => { }}>GENERATE</Button>
+    </div>
   )
 }
