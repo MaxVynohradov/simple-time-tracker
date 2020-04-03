@@ -12,8 +12,6 @@ import useStyles from './styles'
 function ChartTab({ tasks, generateTasks }) {
   const classes = useStyles();
   const chartData = generateChartData(tasks);
-  console.log('tasks', tasks);
-  console.log('chartData', chartData);
   return (
     <div className={classes.chartContainer}>
       <BarChart
@@ -26,7 +24,7 @@ function ChartTab({ tasks, generateTasks }) {
         }}
       >
         <CartesianGrid strokeDasharray="5 5" />
-        <XAxis dataKey="name" />
+        <XAxis dataKey="name" label={{ value: "Minutes in this hours" }} />
         <YAxis type="number" domain={[0, 60]} />
         <Tooltip />
         <Legend />
