@@ -1,9 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
   BarChart, Bar, CartesianGrid, Tooltip, Legend, XAxis, YAxis
 } from 'recharts';
 import { Button } from '@material-ui/core';
 
+import { generateTask } from '../../store/actionsCreator'
 import useStyles from './styles'
 
 const data = [
@@ -30,9 +32,9 @@ const data = [
   },
 ];
 
-export default function ChartTab() {
+function ChartTab({ tasks, generateTasks }) {
   const classes = useStyles();
-
+  console.log('tasks', tasks);
   return (
     <div className={classes.chartContainer}>
       <BarChart
@@ -50,7 +52,21 @@ export default function ChartTab() {
         <Legend />
         <Bar dataKey="minutes" fill="#3f51b5" />
       </BarChart>
-      <Button color="primary" size="large" className={classes.generateButton} onClick={() => { }}>GENERATE</Button>
+      <Button 
+        color="primary" 
+        size="large" 
+        className={classes.generateButton}
+        onClick={() => generateTasks()}
+      >
+        GENERATE
+      </Button>
     </div>
   )
 }
+
+const mapStateToProps = ({ tasksStore: { tasks } }) => ({ tasks });
+const mapDispatchToProps = (dispatch) => ({
+  generateTasks: () => dispatch(generateTask())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChartTab)
