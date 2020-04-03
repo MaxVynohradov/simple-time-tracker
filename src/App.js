@@ -6,7 +6,9 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import { Provider } from 'react-redux';
 
+import store from './store/reducer';
 import Timer from './components/Timer'
 import InfoTabs from './components/InfoTabs'
 import NotFoundPage from './components/NotFoundPage';
@@ -25,24 +27,27 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
+
 function App() {
   const classes = useStyles()
   return (
-    <Router>
-      <Switch>
-        <Redirect from="/" to="/tasks" exact />
-        <div className={classes.app}>
-          <Timer />
-          <InfoTabs />
-        </div>
-        <Route path="/tasks/:id">
-          <TaskDetails />
-        </Route>
-        <Route path="*">
-          <NotFoundPage />
-        </Route>
-      </Switch>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Switch>
+          <Redirect from="/" to="/tasks" exact />
+          <div className={classes.app}>
+            <Timer />
+            <InfoTabs />
+          </div>
+          <Route path="/tasks/:id">
+            <TaskDetails />
+          </Route>
+          <Route path="*">
+            <NotFoundPage />
+          </Route>
+        </Switch>
+      </Router>
+    </Provider>
   );
 }
 

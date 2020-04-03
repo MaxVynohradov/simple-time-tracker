@@ -1,5 +1,4 @@
-import React, { Fragment } from 'react';
-// import PropTypes from 'prop-types';
+import React from 'react';
 import {
   BarChart, Bar, CartesianGrid, Tooltip, Legend, XAxis, YAxis
 } from 'recharts';

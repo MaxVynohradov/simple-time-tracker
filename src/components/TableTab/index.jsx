@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import { connect } from 'react-redux'
 import {
   Table, TableBody, Button, TableCell, TableContainer, TableHead, TableRow,
 } from '@material-ui/core';
@@ -8,7 +8,7 @@ import {
 import useStyles from './styles'
 
 
-export default function TableTab() {
+function TableTab() {
   const classes = useStyles();
 
   return (
@@ -46,3 +46,7 @@ export default function TableTab() {
     </TableContainer>
   )
 }
+
+const mapStateToProps = ({ tasks }) => ({ tasks });
+
+export default connect(mapStateToProps)(TableTab)
