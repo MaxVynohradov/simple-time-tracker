@@ -5,6 +5,9 @@ export default makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
   },
+  chart: {
+    alignSelf: 'center',
+  },
   generateButton: {
     width: '100px',
     alignSelf: 'flex-end',

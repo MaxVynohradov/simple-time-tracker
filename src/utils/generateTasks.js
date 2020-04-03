@@ -1,9 +1,10 @@
-const generateDuration = () => 60 * 100 * Math.floor(Math.random() * 80 + 10)
+const generateDuration = (highRange = 80) => 60 * 100 * Math.floor(Math.random() * highRange + 10)
 
 
 const generateTasks = () => {
-  const count = 15 - Math.ceil(Math.random() * 100) % 5
-  let startTime = new Date().setHours(0, 0, 0, 0).valueOf();
+  const count = 15 - Math.ceil(Math.random() * 100) % 5;
+  const timeBetweenTasks = 1200;
+  let startTime = new Date().setHours(0, 0, 0, 0).valueOf() + generateDuration(timeBetweenTasks);
   let endTime;
   return Array(count).fill(null).map((item, idx) => {
     startTime += generateDuration();
@@ -15,7 +16,7 @@ const generateTasks = () => {
       duration,
       endTime: new Date(endTime),
     }
-    startTime = endTime + generateDuration();
+    startTime = endTime + generateDuration(timeBetweenTasks);
     return task
   })
 }

@@ -6,48 +6,28 @@ import {
 import { Button } from '@material-ui/core';
 
 import { generateTask } from '../../store/actionsCreator'
+import generateChartData from '../../utils/generateChartData'
 import useStyles from './styles'
-
-const data = [
-  {
-    name: 'Page A', minutes: 2400,
-  },
-  {
-    name: 'Page B', minutes: 2210,
-  },
-  {
-    name: 'Page C', minutes: 2290,
-  },
-  {
-    name: 'Page D', minutes: 2000,
-  },
-  {
-    name: 'Page E', minutes: 2181,
-  },
-  {
-    name: 'Page F', minutes: 2500,
-  },
-  {
-    name: 'Page G', minutes: 2100,
-  },
-];
 
 function ChartTab({ tasks, generateTasks }) {
   const classes = useStyles();
+  const chartData = generateChartData(tasks);
   console.log('tasks', tasks);
+  console.log('chartData', chartData);
   return (
     <div className={classes.chartContainer}>
       <BarChart
-        width={950}  // calc dynamicly
+        width={950}
         height={400}
-        data={data}
+        data={chartData}
+        className={classes.chart}
         margin={{
           top: 15, right: 0, left: 0, bottom: 10,
         }}
       >
         <CartesianGrid strokeDasharray="5 5" />
         <XAxis dataKey="name" />
-        <YAxis type="number" domain={[0, 100]} />
+        <YAxis type="number" domain={[0, 60]} />
         <Tooltip />
         <Legend />
         <Bar dataKey="minutes" fill="#3f51b5" />
