@@ -47,6 +47,6 @@ function TableTab() {
   )
 }
 
-const mapStateToProps = ({ tasks }) => ({ tasks });
+const mapStateToProps = ({ tasksStore}) => ({ ...tasksStore });
 
 export default connect(mapStateToProps)(TableTab)

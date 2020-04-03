@@ -1,4 +1,4 @@
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
 import {  START_TIMER, STOP_TIMER, DELETE_TASK, GENERATE_TASK } from './types';
 import generateTasks from '../utils/generateTasks';
 
@@ -10,7 +10,7 @@ const initialState = {
   }
 };
 
-const reducer = (state = initialState, action) => {
+const tasksReducer = (state = initialState, action) => {
   switch (action.type) {
     case START_TIMER: 
       return { ...state }
@@ -24,5 +24,7 @@ const reducer = (state = initialState, action) => {
       return { ...state }
   }
 }
+
+const reducer = combineReducers({ tasksStore: tasksReducer });
 
 export default createStore(reducer)
