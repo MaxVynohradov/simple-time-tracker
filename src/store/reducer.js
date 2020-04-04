@@ -5,19 +5,18 @@ import generateTasks from '../utils/generateTasks';
 const initialState = {
   tasks: [],
   currentTask: {
-    // startTime: new Date(),
-    // stopTime: new Date(),
+    duration: 0,
   }
 };
 
 const tasksReducer = (state = initialState, action) => {
   switch (action.type) {
     case START_TIMER: 
-      return { ...state }
+      return { ...state, currentTask: action.currentTask }
     case STOP_TIMER:
-      return { ...state }
+      return { ...state, currentTask: action.currentTask, tasks: action.tasks }
     case DELETE_TASK:
-      return { ...state }
+      return { ...state, tasks: action.tasks }
     case GENERATE_TASK:
       return { ...state, tasks: generateTasks() }
     default:
@@ -27,7 +26,9 @@ const tasksReducer = (state = initialState, action) => {
 
 const reducer = combineReducers({ tasksStore: tasksReducer });
 
-export default createStore(
+const store = createStore(
   reducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 )
+
+export default store
