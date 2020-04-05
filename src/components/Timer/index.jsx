@@ -4,6 +4,7 @@ import { TextField, Button } from '@material-ui/core';
 
 import { startTask, stopTask } from '../../store/actionsCreator'
 import { formatTimerCounter } from '../../utils/durationFormatter'
+import AlertDialog from '../AlertDialog'
 import useStyles from './styles'
 
 let interval;
@@ -13,6 +14,8 @@ const Timer = ({ tasks, currentTask, startTimer, stopTimer, updateTimer }) => {
   const taskNameInputRef = useRef(null);
   const [counter, setCounter] = useState(currentTask.duration);
   const [buttonText, setButtonText] = useState(currentTask.duration ? 'Stop' : 'Start');
+
+  const [dialogOpen, setDialogOpen] = React.useState(false);
 
   useEffect(() => {
     return () => {
@@ -25,7 +28,6 @@ const Timer = ({ tasks, currentTask, startTimer, stopTimer, updateTimer }) => {
       taskNameInputRef.current.disabled = true;
       const startTime = new Date();
       startTimer({
-        name: taskNameInputRef.current.value,
         duration: 0,
         startTime,
         id: `f${(~~(Math.random()*1e8)).toString(16)}`,
@@ -35,11 +37,20 @@ const Timer = ({ tasks, currentTask, startTimer, stopTimer, updateTimer }) => {
         setCounter(new Date().valueOf() - startTime.valueOf());
       }, 1000)
     } else {
+      if (taskNameInputRef.current.value === '') {
+        setDialogOpen(true);
+        return
+      }
       clearInterval(interval);
       const endTime = new Date();
       stopTimer({
         duration: 0,
-      }, [...tasks, { ...currentTask, endTime, duration: endTime - currentTask.startTime }])
+      }, [...tasks, { 
+        ...currentTask,
+        endTime, 
+        duration: endTime - currentTask.startTime, 
+        name: taskNameInputRef.current.value, 
+      }])
       taskNameInputRef.current.value = '';
       taskNameInputRef.current.disabled = false;
       setCounter(0);
@@ -69,6 +80,7 @@ const Timer = ({ tasks, currentTask, startTimer, stopTimer, updateTimer }) => {
       >
         {buttonText}
       </Button>
+      <AlertDialog dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} taskNameInputRef={taskNameInputRef} />
     </div>
   )
 }
