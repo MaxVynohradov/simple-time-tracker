@@ -4,11 +4,13 @@ import {
   Table, TableBody, Button, TableCell, TableContainer, TableHead, TableRow,
 } from '@material-ui/core';
 
+import { deleteTask } from '../../store/actionsCreator'
+import { formatTimerCounter } from '../../utils/durationFormatter'
 
 import useStyles from './styles'
 
 
-function TableTab() {
+function TableTab({ tasks, deleteTask }) {
   const classes = useStyles();
 
   return (
@@ -26,13 +28,13 @@ function TableTab() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {Array.from(Array(5)).map((row, indx) => (
+          {tasks.map(({ name, duration, startTime, endTime  }, indx) => (
             <TableRow key={indx} className={classes.customTr}>
               <TableCell>{indx}</TableCell>
-              <TableCell align="center">Task</TableCell>
-              <TableCell align="center">Task start</TableCell>
-              <TableCell align="center">Task end</TableCell>
-              <TableCell align="center">Time spend</TableCell>
+              <TableCell align="center">{ name }</TableCell>
+              <TableCell align="center">{ startTime.toTimeString().split(' ')[0] }</TableCell>
+              <TableCell align="center">{ endTime.toTimeString().split(' ')[0] }</TableCell>
+              <TableCell align="center">{ formatTimerCounter(duration) }</TableCell>
               <TableCell align="center">
                 <Button size="large" className={classes.btnWithShadow}>Info</Button>
               </TableCell>
@@ -49,4 +51,8 @@ function TableTab() {
 
 const mapStateToProps = ({ tasksStore: { tasks } }) => ({ tasks });
 
-export default connect(mapStateToProps)(TableTab)
+const mapDispatchToProps = (dispatch) => ({
+  deleteTask: (tasks) => dispatch(deleteTask(tasks))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TableTab)
