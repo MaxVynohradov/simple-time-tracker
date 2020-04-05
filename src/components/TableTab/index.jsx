@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { connect } from 'react-redux'
 import {
   Table, TableBody, Button, TableCell, TableContainer, TableHead, TableRow,
@@ -12,6 +12,11 @@ import useStyles from './styles'
 
 function TableTab({ tasks, deleteTask }) {
   const classes = useStyles();
+
+  const onRemoveTaskBtnClick = useCallback((e) => {
+    e.preventDefault();
+    deleteTask(tasks, e.target.closest('tr').getAttribute('id'))
+  }, [deleteTask, tasks])
 
   return (
     <TableContainer>
@@ -28,9 +33,9 @@ function TableTab({ tasks, deleteTask }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {tasks.map(({ name, duration, startTime, endTime  }, indx) => (
-            <TableRow key={indx} className={classes.customTr}>
-              <TableCell>{indx}</TableCell>
+          {tasks.length > 0 ? tasks.map(({ id, name, duration, startTime, endTime  }, idx) => (
+            <TableRow key={idx} className={classes.customTr} id={id} >
+              <TableCell>{idx}</TableCell>
               <TableCell align="center">{ name }</TableCell>
               <TableCell align="center">{ startTime.toTimeString().split(' ')[0] }</TableCell>
               <TableCell align="center">{ endTime.toTimeString().split(' ')[0] }</TableCell>
@@ -39,10 +44,10 @@ function TableTab({ tasks, deleteTask }) {
                 <Button size="large" className={classes.btnWithShadow}>Info</Button>
               </TableCell>
               <TableCell align="center">
-                <Button size="large" className={classes.btnWithShadow}>Delete</Button>
+                <Button size="large" className={classes.btnWithShadow} onClick={onRemoveTaskBtnClick} >Delete</Button>
               </TableCell>
             </TableRow>
-          ))}
+          )) :  <p>Table Empty</p> }
         </TableBody>
       </Table>
     </TableContainer>
@@ -52,7 +57,7 @@ function TableTab({ tasks, deleteTask }) {
 const mapStateToProps = ({ tasksStore: { tasks } }) => ({ tasks });
 
 const mapDispatchToProps = (dispatch) => ({
-  deleteTask: (tasks) => dispatch(deleteTask(tasks))
+  deleteTask: (tasks, tasksIdToRemove) => dispatch(deleteTask(tasks.filter(({ id }) => id !== tasksIdToRemove)))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TableTab)

@@ -28,6 +28,7 @@ const Timer = ({ tasks, currentTask, startTimer, stopTimer, updateTimer }) => {
         name: taskNameInputRef.current.value,
         duration: 0,
         startTime,
+        id: `f${(~~(Math.random()*1e8)).toString(16)}`,
       })
       setButtonText('Stop');
       interval = setInterval(() => {
