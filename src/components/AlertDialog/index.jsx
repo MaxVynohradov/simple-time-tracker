@@ -27,7 +27,7 @@ export default ({ dialogOpen, setDialogOpen, taskNameInputRef }) => {
       aria-labelledby="alert-dialog-slide-title"
       aria-describedby="alert-dialog-slide-description"
     >
-      <DialogTitle id="alert-dialog-slide-title"><span class={useStyles().dialogTitle}>Empty task name</span></DialogTitle>
+      <DialogTitle id="alert-dialog-slide-title"><span className={useStyles().dialogTitle}>Empty task name</span></DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-slide-description">
           You are trying close your task without name, enter the title and try again!

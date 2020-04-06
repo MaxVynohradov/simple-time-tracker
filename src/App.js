@@ -42,9 +42,8 @@ function App() {
           <Route path="/tasks/:id">
             <TaskDetails />
           </Route>
-          <Route path="*">
-            <NotFoundPage />
-          </Route>
+          <Route path="/404" component={NotFoundPage} />
+          <Redirect to="/404" />
         </Switch>
       </Router>
     </Provider>
