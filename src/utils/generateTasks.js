@@ -10,8 +10,10 @@ const generateTasks = () => {
     startTime += generateDuration();
     const duration = generateDuration();
     endTime = startTime + duration;
+    const id = `f${(~~(Math.random()*1e8)).toString(16)}`;
     const task = {
-      name: `Auto-generated task #${idx}`,
+      id,
+      name: `Auto-generated task #${id}`,
       startTime: new Date(startTime),
       duration,
       endTime: new Date(endTime),

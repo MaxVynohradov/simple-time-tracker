@@ -1,18 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { useParams, useHistory } from "react-router-dom";
-import { Paper, List, ListItem, ListItemText, Divider } from '@material-ui/core';
+import { Paper, List, ListItem, ListItemText, Divider, Typography } from '@material-ui/core';
 
 import { formatTimerCounter } from '../../utils/durationFormatter'
+import useStyles from './styles'
 
 function TaskDetails({ tasks }) {
+  const classes = useStyles();
   const { id } = useParams()
   const history = useHistory()
   const task = tasks.find(({ id: tasksId }) => id === tasksId)
-  if (!task) history.push('/404')
-  const { id: taskId, name, duration, startTime, endTime  } = task;
+  if (!task) return history.push('/404')
+  const { id: taskId, name, duration, startTime, endTime } = task;
   return (
-    <Paper>
+    <Paper class={classes.alignItemsAndJustifyContent}>
       <h2>Task</h2>
       <List component="nav" aria-label="mailbox folders">
         <ListItem divider>
@@ -36,11 +38,11 @@ function TaskDetails({ tasks }) {
         </ListItem>
         <Divider />
         <ListItem button onClick={() => history.push('/tasks')}>
-          <ListItemText secondary="Go to tasks page" />
+          <ListItemText
+            primary={<Typography type="body2" style={{ color: '#d32f2f' }}>Go to tasks page</Typography>}
+          />
         </ListItem>
       </List>
-
-      {/* TODO: add logic to show props  */}
     </Paper>
   )
 }
