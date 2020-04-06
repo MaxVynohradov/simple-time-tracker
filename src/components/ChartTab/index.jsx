@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-  BarChart, Bar, CartesianGrid, Tooltip, Legend, XAxis, YAxis,
+  BarChart, Bar, CartesianGrid, Tooltip, Legend, XAxis, YAxis, Label,
 } from 'recharts';
 import { Button } from '@material-ui/core';
 
@@ -25,7 +25,11 @@ function ChartTab({ tasks, generateTasks }) {
         }}
       >
         <CartesianGrid strokeDasharray="5 5" />
-        <XAxis dataKey="name" label={{ value: 'Minutes in this hours' }} />
+        <XAxis
+          dataKey="name"
+        >
+          <Label value="Minutes in this hours" position="center" offset={50} />
+        </XAxis>
         <YAxis type="number" domain={[0, 60]} />
         <Tooltip />
         <Legend />

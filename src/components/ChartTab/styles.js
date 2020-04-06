@@ -13,4 +13,7 @@ export default makeStyles((theme) => ({
     alignSelf: 'flex-end',
     boxShadow: theme.shadows[6],
   },
+  customXAxis: {
+    marginTop: '50px',
+  },
 }));

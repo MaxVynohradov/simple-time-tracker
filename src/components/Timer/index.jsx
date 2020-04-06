@@ -27,6 +27,7 @@ const Timer = ({
   const [dialogOpen, setDialogOpen] = React.useState(false);
 
   useEffect(() => {
+    const intervalValue = interval.current.value;
     const { id, startTime, name } = currentTask;
     if (id) {
       interval.current.value = setInterval(() => {
@@ -34,8 +35,8 @@ const Timer = ({
       }, 1000);
       taskNameInputRef.current.value = name || '';
     }
-    return () => clearInterval(interval.current.value);
-  }, [currentTask]);
+    return () => clearInterval(intervalValue);
+  }, [currentTask, interval]);
 
   const onButtonClick = useCallback(() => {
     if (buttonText === 'Start') {
