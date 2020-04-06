@@ -18,7 +18,7 @@ function TableTab({ tasks, deleteTask }) {
 
   const onRemoveTaskBtnClick = useCallback(
     (e) => deleteTask(e.target.closest('tr').getAttribute('id')),
-    [deleteTask, tasks],
+    [deleteTask],
   );
 
   const onInfoTaskBtnClick = useCallback((e) => history.push(`/tasks/${e.target.closest('tr').getAttribute('id')}`), [history]);
@@ -62,13 +62,13 @@ function TableTab({ tasks, deleteTask }) {
 }
 
 TableTab.propTypes = {
-  tasks: PropTypes.arrayOf({
+  tasks: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
     startTime: PropTypes.instanceOf(Date),
     endTime: PropTypes.instanceOf(Date),
     duration: PropTypes.number,
-  }).isRequired,
+  }).isRequired).isRequired,
   deleteTask: PropTypes.func.isRequired,
 };
 

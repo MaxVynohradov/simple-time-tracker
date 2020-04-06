@@ -44,13 +44,13 @@ function ChartTab({ tasks, generateTasks }) {
 }
 
 ChartTab.propTypes = {
-  tasks: PropTypes.arrayOf({
+  tasks: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
     startTime: PropTypes.instanceOf(Date),
     endTime: PropTypes.instanceOf(Date),
     duration: PropTypes.number,
-  }).isRequired,
+  }).isRequired).isRequired,
   generateTasks: PropTypes.func.isRequired,
 };
 

@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types, react/require-default-props */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Tab } from '@material-ui/core';
@@ -12,8 +13,8 @@ const TabLink = ({
 }) => (<Tab component={RouterLink} to={to ?? value} value={value} {...props} />);
 
 TabLink.propTypes = {
-  to: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  to: PropTypes.any,
+  value: PropTypes.any,
 };
 
 export default TabLink;

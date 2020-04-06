@@ -14,7 +14,7 @@ import useStyles from './styles';
 let interval;
 
 const Timer = ({
-  tasks, currentTask, startTimer, stopTimer,
+  currentTask, startTimer, stopTimer,
 }) => {
   const classes = useStyles();
   const taskNameInputRef = useRef(null);
@@ -63,7 +63,7 @@ const Timer = ({
       clearInterval(interval);
       setButtonText('Start');
     }
-  }, [buttonText, currentTask, startTimer, stopTimer, tasks]);
+  }, [buttonText, currentTask, startTimer, stopTimer]);
 
   return (
     <div className={classes.timerContainer}>
@@ -95,13 +95,6 @@ const Timer = ({
 };
 
 Timer.propTypes = {
-  tasks: PropTypes.arrayOf({
-    id: PropTypes.string,
-    name: PropTypes.string,
-    startTime: PropTypes.instanceOf(Date),
-    endTime: PropTypes.instanceOf(Date),
-    duration: PropTypes.number,
-  }).isRequired,
   currentTask: PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
