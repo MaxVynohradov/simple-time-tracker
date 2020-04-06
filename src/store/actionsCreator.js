@@ -6,6 +6,6 @@ export const generateTask = () => ({ type: GENERATE_TASK });
 
 export const startTask = (currentTask) => ({ type: START_TIMER, currentTask });
 
-export const stopTask = (currentTask, tasks) => ({ type: STOP_TIMER, currentTask, tasks });
+export const stopTask = (currentTask) => ({ type: STOP_TIMER, currentTask });
 
 export const deleteTask = (tasksIdToRemove) => ({ type: DELETE_TASK, tasksIdToRemove });

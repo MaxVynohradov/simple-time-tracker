@@ -34,7 +34,11 @@ const loadedStateForTaskReduce = () => {
 const tasksReducer = (state = loadedStateForTaskReduce() || initialState, action) => {
   switch (action.type) {
     case STOP_TIMER:
-      return { ...state, currentTask: action.currentTask, tasks: action.tasks };
+      return {
+        ...state,
+        currentTask: { duration: 0 },
+        tasks: [...state.tasks, { ...action.currentTask }],
+      };
     case START_TIMER:
       return { ...state, currentTask: action.currentTask };
     case DELETE_TASK:

@@ -1,3 +1,4 @@
+/* eslint-disable no-bitwise */
 import React, {
   useState, useCallback, useEffect, useRef,
 } from 'react';
@@ -32,25 +33,17 @@ const Timer = ({
       }, 1000);
       taskNameInputRef.current.value = name || '';
     }
-    return () => {
-      clearInterval(interval);
-    };
+    return () => clearInterval(interval);
   }, [currentTask]);
 
   const onButtonClick = useCallback(() => {
     if (buttonText === 'Start') {
       const startTime = new Date();
       startTimer({
-        duration: 0,
-        startTime,
-        name: taskNameInputRef.current.value,
-        // eslint-disable-next-line no-bitwise
-        id: `f${(~~(Math.random() * 1e8)).toString(16)}`,
+        duration: 0, startTime, name: taskNameInputRef.current.value, id: `f${(~~(Math.random() * 1e8)).toString(16)}`,
       });
       setButtonText('Stop');
-      interval = setInterval(() => {
-        setCounter(new Date().valueOf() - startTime.valueOf());
-      }, 1000);
+      interval = setInterval(() => setCounter(new Date().valueOf() - startTime.valueOf()), 1000);
     } else {
       if (taskNameInputRef.current.value === '') {
         setDialogOpen(true);
@@ -59,17 +52,14 @@ const Timer = ({
       clearInterval(interval);
       const endTime = new Date();
       stopTimer({
-        duration: 0,
-      }, [...tasks, {
         ...currentTask,
         endTime,
         duration: endTime - currentTask.startTime,
         name: taskNameInputRef.current.value,
-      }]);
+      });
       taskNameInputRef.current.value = '';
       taskNameInputRef.current.disabled = false;
       setCounter(0);
-
       clearInterval(interval);
       setButtonText('Start');
     }
