@@ -32,7 +32,7 @@ function App() {
   const classes = useStyles();
   return (
     <Provider store={store}>
-      <Router>
+      <Router basename="/simple-time-tracker">
         <Switch>
           <Redirect from="/" to="/tasks" exact />
           <Route path={['/tasks', '/chart']} exact>
