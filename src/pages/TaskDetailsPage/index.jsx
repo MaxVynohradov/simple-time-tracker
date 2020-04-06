@@ -9,7 +9,7 @@ import {
 import { formatTimerCounter } from '../../utils/durationFormatter';
 import useStyles from './styles';
 
-function TaskDetails({ tasks }) {
+function TaskDetailsPage({ tasks }) {
   const classes = useStyles();
   const { id } = useParams();
   const history = useHistory();
@@ -52,7 +52,7 @@ function TaskDetails({ tasks }) {
   );
 }
 
-TaskDetails.propTypes = {
+TaskDetailsPage.propTypes = {
   tasks: PropTypes.arrayOf({
     id: PropTypes.string,
     name: PropTypes.string,
@@ -62,6 +62,7 @@ TaskDetails.propTypes = {
   }).isRequired,
 };
 
-const mapStateToProps = ({ tasksStore: { tasks } }) => ({ tasks });
 
-export default connect(mapStateToProps)(TaskDetails);
+export default connect(
+  ({ tasksStore: { tasks } }) => ({ tasks }),
+)(TaskDetailsPage);

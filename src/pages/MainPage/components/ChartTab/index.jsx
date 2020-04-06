@@ -6,8 +6,8 @@ import {
 } from 'recharts';
 import { Button } from '@material-ui/core';
 
-import { generateTask } from '../../store/actionsCreator';
-import generateChartData from '../../utils/generateChartData';
+import { generateTask } from '../../../../store/actionsCreator';
+import generateChartData from '../../../../utils/generateChartData';
 import useStyles from './styles';
 
 function ChartTab({ tasks, generateTasks }) {

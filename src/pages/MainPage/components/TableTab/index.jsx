@@ -5,8 +5,8 @@ import {
   Table, TableBody, Button, TableCell, TableContainer, TableHead, TableRow,
 } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import { deleteTask } from '../../store/actionsCreator';
-import { formatTimerCounter } from '../../utils/durationFormatter';
+import { deleteTask } from '../../../../store/actionsCreator';
+import { formatTimerCounter } from '../../../../utils/durationFormatter';
 
 import useStyles from './styles';
 

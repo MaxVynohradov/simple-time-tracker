@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import {
   BrowserRouter as Router,
   Switch,
@@ -9,40 +8,22 @@ import {
 import { Provider } from 'react-redux';
 
 import store from './store/reducer';
-import Timer from './components/Timer';
-import InfoTabs from './components/InfoTabs';
-import NotFoundPage from './components/NotFoundPage';
-import TaskDetails from './components/TaskDetails';
-
-const useStyles = makeStyles(() => ({
-  app: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    height: '100hv',
-    margin: 0,
-    border: 0,
-  },
-}));
+import NotFoundPage from './pages/NotFoundPage';
+import TaskDetailsPage from './pages/TaskDetailsPage';
+import MainPage from './pages/MainPage';
 
 
 function App() {
-  const classes = useStyles();
   return (
     <Provider store={store}>
       <Router basename="/simple-time-tracker">
         <Switch>
           <Redirect from="/" to="/tasks" exact />
           <Route path={['/tasks', '/chart']} exact>
-            <div className={classes.app}>
-              <Timer />
-              <InfoTabs />
-            </div>
+            <MainPage />
           </Route>
           <Route path="/tasks/:id" exact>
-            <TaskDetails />
+            <TaskDetailsPage />
           </Route>
           <Route path="/404" component={NotFoundPage} exact />
           <Redirect to="/404" />

@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { TextField, Button } from '@material-ui/core';
 
-import { startTask, stopTask } from '../../store/actionsCreator';
-import { formatTimerCounter } from '../../utils/durationFormatter';
+import { startTask, stopTask } from '../../../../store/actionsCreator';
+import { formatTimerCounter } from '../../../../utils/durationFormatter';
 import AlertDialog from '../AlertDialog';
 import useStyles from './styles';
 
