@@ -12,10 +12,14 @@ import useStyles from './styles';
 
 let interval;
 
-const Timer = ({ tasks, currentTask, startTimer, stopTimer }) => {
-  const classes = useStyles()
+const Timer = ({
+  tasks, currentTask, startTimer, stopTimer,
+}) => {
+  const classes = useStyles();
   const taskNameInputRef = useRef(null);
-  const [counter, setCounter] = useState(currentTask.id ? new Date().valueOf() - currentTask.startTime.valueOf() : 0);
+  const [counter, setCounter] = useState(
+    currentTask.id ? new Date().valueOf() - currentTask.startTime.valueOf() : 0,
+  );
   const [buttonText, setButtonText] = useState(currentTask.id ? 'Stop' : 'Start');
 
   const [dialogOpen, setDialogOpen] = React.useState(false);
@@ -25,13 +29,13 @@ const Timer = ({ tasks, currentTask, startTimer, stopTimer }) => {
     if (id) {
       interval = setInterval(() => {
         setCounter(new Date().valueOf() - startTime.valueOf());
-      }, 1000)
+      }, 1000);
       taskNameInputRef.current.value = name || '';
     }
     return () => {
       clearInterval(interval);
-    }
-  }, [currentTask])
+    };
+  }, [currentTask]);
 
   const onButtonClick = useCallback(() => {
     if (buttonText === 'Start') {
@@ -41,27 +45,27 @@ const Timer = ({ tasks, currentTask, startTimer, stopTimer }) => {
         startTime,
         name: taskNameInputRef.current.value,
         // eslint-disable-next-line no-bitwise
-        id: `f${(~~(Math.random()*1e8)).toString(16)}`,
-      })
+        id: `f${(~~(Math.random() * 1e8)).toString(16)}`,
+      });
       setButtonText('Stop');
       interval = setInterval(() => {
         setCounter(new Date().valueOf() - startTime.valueOf());
-      }, 1000)
+      }, 1000);
     } else {
       if (taskNameInputRef.current.value === '') {
         setDialogOpen(true);
-        return
+        return;
       }
       clearInterval(interval);
       const endTime = new Date();
       stopTimer({
         duration: 0,
-      }, [...tasks, { 
+      }, [...tasks, {
         ...currentTask,
-        endTime, 
+        endTime,
         duration: endTime - currentTask.startTime,
-        name: taskNameInputRef.current.value, 
-      }])
+        name: taskNameInputRef.current.value,
+      }]);
       taskNameInputRef.current.value = '';
       taskNameInputRef.current.disabled = false;
       setCounter(0);
@@ -91,7 +95,11 @@ const Timer = ({ tasks, currentTask, startTimer, stopTimer }) => {
       >
         {buttonText}
       </Button>
-      <AlertDialog dialogOpen={dialogOpen} setDialogOpen={setDialogOpen} taskNameInputRef={taskNameInputRef} />
+      <AlertDialog
+        dialogOpen={dialogOpen}
+        setDialogOpen={setDialogOpen}
+        taskNameInputRef={taskNameInputRef}
+      />
     </div>
   );
 };
