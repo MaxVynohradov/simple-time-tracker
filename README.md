@@ -1,13 +1,16 @@
-#Simple Realtime Task Tracker 
+# Simple Realtime Task Tracker 
+
+---
 
 ![master-branch-ci](https://github.com/MaxVinogradov/simple-time-tracker/workflows/master-branch-ci/badge.svg)
 
 Technologies:
-[x] React
-[x] Redux
-[x] React-Router
-[x] React-Saga
-[x] Eslint + plugins
-[x] material-ui
-[x] JSS
-[x] Cypress
+
+[X] React
+[X] Redux
+[X] React-Router
+[X] React-Saga
+[X] Eslint + plugins
+[X] material-ui
+[X] JSS
+[X] Cypress
