@@ -17,7 +17,7 @@ function TableTab({ tasks, deleteTask }) {
   const history = useHistory();
 
   const onRemoveTaskBtnClick = useCallback(
-    (e) => deleteTask(e.target.closest('tr').getAttribute('id')),
+    (id) => () => deleteTask(id),
     [deleteTask],
   );
 
@@ -41,7 +41,7 @@ function TableTab({ tasks, deleteTask }) {
           {tasks.length > 0 ? tasks.map(({
             id, name, duration, startTime, endTime,
           }, idx) => (
-            <TableRow key={id} className={classes.customTr} id={id}>
+            <TableRow key={id} className={classes.customTr}>
               <TableCell>{idx}</TableCell>
               <TableCell align="center">{ name }</TableCell>
               <TableCell align="center">{ startTime.toTimeString().split(' ')[0] }</TableCell>
@@ -51,7 +51,7 @@ function TableTab({ tasks, deleteTask }) {
                 <Button size="large" className={classes.btnWithShadow} onClick={onInfoTaskBtnClick}>Info</Button>
               </TableCell>
               <TableCell align="center">
-                <Button size="large" className={classes.btnWithShadow} onClick={onRemoveTaskBtnClick}>Delete</Button>
+                <Button size="large" className={classes.btnWithShadow} onClick={onRemoveTaskBtnClick(id)}>Delete</Button>
               </TableCell>
             </TableRow>
           )) : <p>Table Empty</p> }
