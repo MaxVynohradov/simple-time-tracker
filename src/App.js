@@ -5,16 +5,16 @@ import {
   Switch,
   Route,
   Redirect,
-} from "react-router-dom";
+} from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import store from './store/reducer';
-import Timer from './components/Timer'
-import InfoTabs from './components/InfoTabs'
+import Timer from './components/Timer';
+import InfoTabs from './components/InfoTabs';
 import NotFoundPage from './components/NotFoundPage';
 import TaskDetails from './components/TaskDetails';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   app: {
     display: 'flex',
     flexDirection: 'column',
@@ -25,23 +25,23 @@ const useStyles = makeStyles(theme => ({
     margin: 0,
     border: 0,
   },
-}))
+}));
 
 
 function App() {
-  const classes = useStyles()
+  const classes = useStyles();
   return (
     <Provider store={store}>
       <Router>
         <Switch>
           <Redirect from="/" to="/tasks" exact />
-          <Route path={['/tasks', '/chart']} exact >
+          <Route path={['/tasks', '/chart']} exact>
             <div className={classes.app}>
               <Timer />
               <InfoTabs />
             </div>
           </Route>
-          <Route path="/tasks/:id" exact >
+          <Route path="/tasks/:id" exact>
             <TaskDetails />
           </Route>
           <Route path="/404" component={NotFoundPage} exact />
@@ -52,4 +52,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

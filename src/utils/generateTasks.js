@@ -1,4 +1,4 @@
-const generateDuration = (highRange = 80) => 60 * 100 * Math.floor(Math.random() * highRange + 10)
+const generateDuration = (highRange = 80) => 60 * 100 * Math.floor(Math.random() * highRange + 10);
 
 
 const generateTasks = () => {
@@ -10,17 +10,17 @@ const generateTasks = () => {
     startTime += generateDuration();
     const duration = generateDuration();
     endTime = startTime + duration;
-    const id = `f${(~~(Math.random()*1e8)).toString(16)}`;
+    const id = `f${(~~(Math.random() * 1e8)).toString(16)}`;
     const task = {
       id,
       name: `Auto-generated task #${id}`,
       startTime: new Date(startTime),
       duration,
       endTime: new Date(endTime),
-    }
+    };
     startTime = endTime + generateDuration(timeBetweenTasks);
-    return task
-  })
-}
+    return task;
+  });
+};
 
 export default generateTasks;

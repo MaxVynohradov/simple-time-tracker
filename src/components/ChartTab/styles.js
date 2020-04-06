@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export default makeStyles(theme => ({
+export default makeStyles((theme) => ({
   chartContainer: {
     display: 'flex',
     flexDirection: 'column',
@@ -12,5 +12,5 @@ export default makeStyles(theme => ({
     width: '100px',
     alignSelf: 'flex-end',
     boxShadow: theme.shadows[6],
-  }
-}))
+  },
+}));

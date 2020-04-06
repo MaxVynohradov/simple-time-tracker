@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export default makeStyles(theme => ({
+export default makeStyles((theme) => ({
   timerContainer: {
     display: 'flex',
     flexDirection: 'column',
@@ -30,4 +30,4 @@ export default makeStyles(theme => ({
     textAlign: 'center',
     color: theme.palette.primary.main,
   },
-}))
+}));

@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export default makeStyles(theme => ({
+export default makeStyles((theme) => ({
   alignItemsAndJustifyContent: {
     width: 500,
     alignSelf: 'center',
@@ -11,4 +11,4 @@ export default makeStyles(theme => ({
     alignItems: 'center',
     boxShadow: theme.shadows[6],
   },
-}))
+}));
