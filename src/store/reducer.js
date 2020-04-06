@@ -12,7 +12,7 @@ const initialState = {
 
 const loadedStateForTaskReduce = () => {
   const loadedState = loadState();
-  if (loadedState.tasksStore) {
+  if (loadedState && loadedState.tasksStore) {
     const store = loadedState.tasksStore;
     store.tasks = store.tasks.map((
       { id, name, duration, startTime, endTime }
