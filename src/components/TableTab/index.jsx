@@ -16,15 +16,12 @@ function TableTab({ tasks, deleteTask }) {
   const classes = useStyles();
   const history = useHistory();
 
-  const onRemoveTaskBtnClick = useCallback((e) => {
-    e.preventDefault();
-    deleteTask(tasks, e.target.closest('tr').getAttribute('id'));
-  }, [deleteTask, tasks]);
+  const onRemoveTaskBtnClick = useCallback(
+    (e) => deleteTask(tasks, e.target.closest('tr').getAttribute('id')),
+    [deleteTask, tasks],
+  );
 
-  const onInfoTaskBtnClick = useCallback((e) => {
-    e.preventDefault();
-    history.push(`/tasks/${e.target.closest('tr').getAttribute('id')}`);
-  }, [history]);
+  const onInfoTaskBtnClick = useCallback((e) => history.push(`/tasks/${e.target.closest('tr').getAttribute('id')}`), [history]);
 
   return (
     <TableContainer>
@@ -85,4 +82,4 @@ TableTab.propTypes = {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(TableTab)
+export default connect(mapStateToProps, mapDispatchToProps)(TableTab);
