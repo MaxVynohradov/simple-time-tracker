@@ -11,13 +11,14 @@ import { formatTimerCounter } from '../../utils/durationFormatter';
 import AlertDialog from '../AlertDialog';
 import useStyles from './styles';
 
-let interval;
+// let interval;
 
 const Timer = ({
   currentTask, startTimer, stopTimer,
 }) => {
   const classes = useStyles();
   const taskNameInputRef = useRef(null);
+  const interval = useRef({ value: 0 });
   const [counter, setCounter] = useState(
     currentTask.id ? new Date().valueOf() - currentTask.startTime.valueOf() : 0,
   );
@@ -28,12 +29,12 @@ const Timer = ({
   useEffect(() => {
     const { id, startTime, name } = currentTask;
     if (id) {
-      interval = setInterval(() => {
+      interval.current.value = setInterval(() => {
         setCounter(new Date().valueOf() - startTime.valueOf());
       }, 1000);
       taskNameInputRef.current.value = name || '';
     }
-    return () => clearInterval(interval);
+    return () => clearInterval(interval.current.value);
   }, [currentTask]);
 
   const onButtonClick = useCallback(() => {
@@ -43,13 +44,16 @@ const Timer = ({
         duration: 0, startTime, name: taskNameInputRef.current.value, id: `f${(~~(Math.random() * 1e8)).toString(16)}`,
       });
       setButtonText('Stop');
-      interval = setInterval(() => setCounter(new Date().valueOf() - startTime.valueOf()), 1000);
+      interval.current.value = setInterval(
+        () => setCounter(new Date().valueOf() - startTime.valueOf()),
+        1000,
+      );
     } else {
       if (taskNameInputRef.current.value === '') {
         setDialogOpen(true);
         return;
       }
-      clearInterval(interval);
+      clearInterval(interval.current.value);
       const endTime = new Date();
       stopTimer({
         ...currentTask,
@@ -60,7 +64,6 @@ const Timer = ({
       taskNameInputRef.current.value = '';
       taskNameInputRef.current.disabled = false;
       setCounter(0);
-      clearInterval(interval);
       setButtonText('Start');
     }
   }, [buttonText, currentTask, startTimer, stopTimer]);
