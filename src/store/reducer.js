@@ -1,9 +1,14 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import logger from 'redux-logger';
+
 import {
   START_TIMER, STOP_TIMER, DELETE_TASK, GENERATE_TASK,
+  LOAD_STORE, LOAD_STORE_REQUEST, DUMP_STORE, DUMP_STORE_REQUEST,
 } from './types';
 import generateTasks from '../utils/generateTasks';
-import { loadState, saveState } from '../localStorage';
+import { saveState } from '../localStorage';
 
 const initialState = {
   tasks: [],
@@ -12,26 +17,7 @@ const initialState = {
   },
 };
 
-const loadedStateForTaskReduce = () => {
-  const loadedState = loadState();
-  if (loadedState && loadedState.tasksStore) {
-    const store = loadedState.tasksStore;
-    store.tasks = store.tasks.map((
-      {
-        id, name, duration, startTime, endTime,
-      },
-    ) => ({
-      id, name, duration, startTime: new Date(startTime), endTime: new Date(endTime),
-    }));
-    const { startTime, endTime } = store.currentTask;
-    store.currentTask.startTime = startTime && new Date(startTime);
-    store.currentTask.endTime = endTime && new Date(endTime);
-    return store;
-  }
-  return undefined;
-};
-
-const tasksReducer = (state = loadedStateForTaskReduce() || initialState, action) => {
+const tasksReducer = (state = initialState, action) => {
   switch (action.type) {
     case STOP_TIMER:
       return {
@@ -48,6 +34,8 @@ const tasksReducer = (state = loadedStateForTaskReduce() || initialState, action
       };
     case GENERATE_TASK:
       return { ...state, tasks: generateTasks() };
+    case LOAD_STORE:
+      return { ...state };
     default:
       return { ...state };
   }
@@ -55,11 +43,16 @@ const tasksReducer = (state = loadedStateForTaskReduce() || initialState, action
 
 const reducer = combineReducers({ tasksStore: tasksReducer });
 
+const sagaMiddleware = createSagaMiddleware();
+
 const store = createStore(
   reducer,
-  // eslint-disable-next-line no-underscore-dangle, no-undef
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  composeWithDevTools(applyMiddleware(logger, sagaMiddleware)),
 );
+
+store.runSaga = sagaMiddleware.run;
+
+store.dispatch({ type: LOAD_STORE_REQUEST });
 
 // eslint-disable-next-line no-undef
 window.addEventListener('beforeunload', (ev) => {

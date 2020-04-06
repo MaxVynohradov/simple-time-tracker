@@ -8,10 +8,12 @@ import {
 import { Provider } from 'react-redux';
 
 import store from './store/reducer';
+import rootSaga from './sagas';
 import NotFoundPage from './pages/NotFoundPage';
 import TaskDetailsPage from './pages/TaskDetailsPage';
 import MainPage from './pages/MainPage';
 
+store.runSaga(rootSaga, store.dispatch);
 
 function App() {
   return (

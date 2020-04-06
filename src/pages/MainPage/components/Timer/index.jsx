@@ -11,7 +11,6 @@ import { formatTimerCounter } from '../../../../utils/durationFormatter';
 import AlertDialog from '../AlertDialog';
 import useStyles from './styles';
 
-// let interval;
 
 const Timer = ({
   currentTask, startTimer, stopTimer,
