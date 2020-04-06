@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import {
@@ -50,6 +51,16 @@ function TaskDetails({ tasks }) {
     </Paper>
   );
 }
+
+TaskDetails.propTypes = {
+  tasks: PropTypes.arrayOf({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    startTime: PropTypes.instanceOf(Date),
+    endTime: PropTypes.instanceOf(Date),
+    duration: PropTypes.number,
+  }).isRequired,
+};
 
 const mapStateToProps = ({ tasksStore: { tasks } }) => ({ tasks });
 

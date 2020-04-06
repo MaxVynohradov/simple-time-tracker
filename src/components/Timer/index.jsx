@@ -1,6 +1,7 @@
 import React, {
   useState, useCallback, useEffect, useRef,
 } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { TextField, Button } from '@material-ui/core';
 
@@ -94,6 +95,26 @@ const Timer = ({ tasks, currentTask, startTimer, stopTimer }) => {
     </div>
   );
 };
+
+Timer.propTypes = {
+  tasks: PropTypes.arrayOf({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    startTime: PropTypes.instanceOf(Date),
+    endTime: PropTypes.instanceOf(Date),
+    duration: PropTypes.number,
+  }).isRequired,
+  currentTask: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    startTime: PropTypes.instanceOf(Date),
+    endTime: PropTypes.instanceOf(Date),
+    duration: PropTypes.number,
+  }).isRequired,
+  startTimer: PropTypes.func.isRequired,
+  stopTimer: PropTypes.func.isRequired,
+};
+
 
 const mapStateToProps = ({ tasksStore: { tasks, currentTask } }) => ({ tasks, currentTask });
 

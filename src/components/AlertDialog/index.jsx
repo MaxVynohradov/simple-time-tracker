@@ -1,19 +1,17 @@
 import React, { forwardRef } from 'react';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Slide from '@material-ui/core/Slide';
+import PropTypes from 'prop-types';
+import {
+  Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide,
+} from '@material-ui/core';
 
 import useStyles from './styles';
 
 // eslint-disable-next-line react/jsx-props-no-spreading
 const Transition = forwardRef((props, ref) => (<Slide direction="up" ref={ref} {...props} />));
 
-export default ({ dialogOpen, setDialogOpen, taskNameInputRef }) => {
+const AlertDialog = ({ dialogOpen, setDialogOpen, taskNameInputRef }) => {
   const onClose = () => {
+    // eslint-disable-next-line no-param-reassign
     taskNameInputRef.current.disabled = false;
     setDialogOpen(false);
   };
@@ -40,3 +38,14 @@ export default ({ dialogOpen, setDialogOpen, taskNameInputRef }) => {
     </Dialog>
   );
 };
+
+AlertDialog.propTypes = {
+  dialogOpen: PropTypes.bool.isRequired,
+  setDialogOpen: PropTypes.func.isRequired,
+  taskNameInputRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.any }),
+  ]).isRequired,
+};
+
+export default AlertDialog;
