@@ -23,8 +23,9 @@ const loadedStateForTaskReduce = () => {
     ) => ({
       id, name, duration, startTime: new Date(startTime), endTime: new Date(endTime),
     }));
-    store.currentTask.startTime = store.currentTask.startTime && new Date(store.currentTask.startTime);
-    store.currentTask.endTime = store.currentTask.endTime && new Date(store.currentTask.endTime);
+    const { startTime, endTime } = store.currentTask;
+    store.currentTask.startTime = startTime && new Date(startTime);
+    store.currentTask.endTime = endTime && new Date(endTime);
     return store;
   }
   return undefined;
@@ -32,10 +33,10 @@ const loadedStateForTaskReduce = () => {
 
 const tasksReducer = (state = loadedStateForTaskReduce() || initialState, action) => {
   switch (action.type) {
-    case START_TIMER:
-      return { ...state, currentTask: action.currentTask };
     case STOP_TIMER:
       return { ...state, currentTask: action.currentTask, tasks: action.tasks };
+    case START_TIMER:
+      return { ...state, currentTask: action.currentTask };
     case DELETE_TASK:
       return { ...state, tasks: action.tasks };
     case GENERATE_TASK:
@@ -49,6 +50,7 @@ const reducer = combineReducers({ tasksStore: tasksReducer });
 
 const store = createStore(
   reducer,
+  // eslint-disable-next-line no-underscore-dangle, no-undef
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 );
 

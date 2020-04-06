@@ -1,18 +1,22 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { useParams, useHistory } from "react-router-dom";
-import { Paper, List, ListItem, ListItemText, Divider, Typography } from '@material-ui/core';
+import React from 'react';
+import { connect } from 'react-redux';
+import { useParams, useHistory } from 'react-router-dom';
+import {
+  Paper, List, ListItem, ListItemText, Divider, Typography,
+} from '@material-ui/core';
 
-import { formatTimerCounter } from '../../utils/durationFormatter'
-import useStyles from './styles'
+import { formatTimerCounter } from '../../utils/durationFormatter';
+import useStyles from './styles';
 
 function TaskDetails({ tasks }) {
   const classes = useStyles();
-  const { id } = useParams()
-  const history = useHistory()
-  const task = tasks.find(({ id: tasksId }) => id === tasksId)
-  if (!task) return history.push('/404')
-  const { id: taskId, name, duration, startTime, endTime } = task;
+  const { id } = useParams();
+  const history = useHistory();
+  const task = tasks.find(({ id: tasksId }) => id === tasksId);
+  if (!task) return history.push('/404');
+  const {
+    id: taskId, name, duration, startTime, endTime,
+  } = task;
   return (
     <Paper class={classes.alignItemsAndJustifyContent}>
       <h2>Task</h2>
@@ -44,9 +48,9 @@ function TaskDetails({ tasks }) {
         </ListItem>
       </List>
     </Paper>
-  )
+  );
 }
 
-const mapStateToProps = ({ tasksStore: { tasks } }) => ({ tasks })
+const mapStateToProps = ({ tasksStore: { tasks } }) => ({ tasks });
 
-export default connect(mapStateToProps)(TaskDetails)
+export default connect(mapStateToProps)(TaskDetails);
