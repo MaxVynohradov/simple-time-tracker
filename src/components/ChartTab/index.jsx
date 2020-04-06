@@ -43,11 +43,6 @@ function ChartTab({ tasks, generateTasks }) {
   );
 }
 
-const mapStateToProps = ({ tasksStore: { tasks } }) => ({ tasks });
-const mapDispatchToProps = (dispatch) => ({
-  generateTasks: () => dispatch(generateTask()),
-});
-
 ChartTab.propTypes = {
   tasks: PropTypes.arrayOf({
     id: PropTypes.string,
@@ -59,4 +54,7 @@ ChartTab.propTypes = {
   generateTasks: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChartTab);
+export default connect(
+  ({ tasksStore: { tasks } }) => ({ tasks }),
+  { generateTasks: generateTask },
+)(ChartTab);

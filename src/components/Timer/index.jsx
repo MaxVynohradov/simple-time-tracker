@@ -116,11 +116,7 @@ Timer.propTypes = {
 };
 
 
-const mapStateToProps = ({ tasksStore: { tasks, currentTask } }) => ({ tasks, currentTask });
-
-const mapDispatchToProps = (dispatch) => ({
-  startTimer: (currentTask) => dispatch(startTask(currentTask)),
-  stopTimer: (currentTask, tasks) => dispatch(stopTask(currentTask, tasks)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Timer)
+export default connect(
+  ({ tasksStore: { tasks, currentTask } }) => ({ tasks, currentTask }),
+  { startTimer: startTask, stopTimer: stopTask },
+)(Timer);

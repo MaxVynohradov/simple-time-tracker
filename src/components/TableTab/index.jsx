@@ -17,7 +17,7 @@ function TableTab({ tasks, deleteTask }) {
   const history = useHistory();
 
   const onRemoveTaskBtnClick = useCallback(
-    (e) => deleteTask(tasks, e.target.closest('tr').getAttribute('id')),
+    (e) => deleteTask(e.target.closest('tr').getAttribute('id')),
     [deleteTask, tasks],
   );
 
@@ -61,15 +61,6 @@ function TableTab({ tasks, deleteTask }) {
   );
 }
 
-const mapStateToProps = ({ tasksStore: { tasks } }) => ({ tasks });
-
-const mapDispatchToProps = (dispatch) => ({
-  deleteTask: (tasks, tasksIdToRemove) => dispatch(
-    deleteTask(tasks.filter(({ id }) => id !== tasksIdToRemove)),
-  ),
-});
-
-
 TableTab.propTypes = {
   tasks: PropTypes.arrayOf({
     id: PropTypes.string,
@@ -82,4 +73,7 @@ TableTab.propTypes = {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(TableTab);
+export default connect(
+  ({ tasksStore: { tasks } }) => ({ tasks }),
+  { deleteTask },
+)(TableTab);

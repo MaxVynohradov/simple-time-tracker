@@ -38,7 +38,10 @@ const tasksReducer = (state = loadedStateForTaskReduce() || initialState, action
     case START_TIMER:
       return { ...state, currentTask: action.currentTask };
     case DELETE_TASK:
-      return { ...state, tasks: action.tasks };
+      return {
+        ...state,
+        tasks: state.tasks.filter(({ id }) => id !== action.tasksIdToRemove),
+      };
     case GENERATE_TASK:
       return { ...state, tasks: generateTasks() };
     default:

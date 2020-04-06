@@ -8,4 +8,4 @@ export const startTask = (currentTask) => ({ type: START_TIMER, currentTask });
 
 export const stopTask = (currentTask, tasks) => ({ type: STOP_TIMER, currentTask, tasks });
 
-export const deleteTask = (tasks) => ({ type: DELETE_TASK, tasks: [...tasks] });
+export const deleteTask = (tasksIdToRemove) => ({ type: DELETE_TASK, tasksIdToRemove });
