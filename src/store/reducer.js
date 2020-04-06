@@ -61,6 +61,11 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 );
 
-store.subscribe(() => saveState(store.getState()));
+// eslint-disable-next-line no-undef
+window.addEventListener('beforeunload', (ev) => {
+  ev.preventDefault();
+  saveState(store.getState());
+});
+
 
 export default store;

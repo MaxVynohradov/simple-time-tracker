@@ -32,4 +32,4 @@ function SimpleTabs() {
   );
 }
 
-export default memo(SimpleTabs)
+export default memo(SimpleTabs);
