@@ -1,6 +1,6 @@
 /* eslint-disable no-bitwise */
 import React, {
-  useState, useCallback, useEffect, useRef,
+  useState, useCallback, useEffect, useRef, memo,
 } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -24,7 +24,7 @@ const Timer = ({
   );
   const [buttonText, setButtonText] = useState(currentTask.id ? 'Stop' : 'Start');
 
-  const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   useEffect(() => {
     const intervalValue = interval.current.value;
@@ -114,4 +114,4 @@ Timer.propTypes = {
 export default connect(
   ({ tasksStore: { tasks, currentTask } }) => ({ tasks, currentTask }),
   { startTimer: startTask, stopTimer: stopTask },
-)(Timer);
+)(memo(Timer));

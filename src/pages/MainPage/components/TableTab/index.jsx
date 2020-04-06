@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, memo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
@@ -76,4 +76,4 @@ TableTab.propTypes = {
 export default connect(
   ({ tasksStore: { tasks } }) => ({ tasks }),
   { deleteTask },
-)(TableTab);
+)(memo(TableTab));

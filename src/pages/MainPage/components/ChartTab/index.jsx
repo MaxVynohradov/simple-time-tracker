@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
@@ -61,4 +61,4 @@ ChartTab.propTypes = {
 export default connect(
   ({ tasksStore: { tasks } }) => ({ tasks }),
   { generateTasks: generateTask },
-)(ChartTab);
+)(memo(ChartTab));
