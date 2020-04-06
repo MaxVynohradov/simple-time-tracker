@@ -35,14 +35,16 @@ function App() {
       <Router>
         <Switch>
           <Redirect from="/" to="/tasks" exact />
-          <div className={classes.app}>
-            <Timer />
-            <InfoTabs />
-          </div>
-          <Route path="/tasks/:id">
+          <Route path={['/tasks', '/chart']} exact >
+            <div className={classes.app}>
+              <Timer />
+              <InfoTabs />
+            </div>
+          </Route>
+          <Route path="/tasks/:id" exact >
             <TaskDetails />
           </Route>
-          <Route path="/404" component={NotFoundPage} />
+          <Route path="/404" component={NotFoundPage} exact />
           <Redirect to="/404" />
         </Switch>
       </Router>
