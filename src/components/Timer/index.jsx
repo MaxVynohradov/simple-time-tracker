@@ -12,20 +12,25 @@ let interval;
 const Timer = ({ tasks, currentTask, startTimer, stopTimer, updateTimer }) => {
   const classes = useStyles()
   const taskNameInputRef = useRef(null);
-  const [counter, setCounter] = useState(currentTask.duration);
-  const [buttonText, setButtonText] = useState(currentTask.duration ? 'Stop' : 'Start');
+  const [counter, setCounter] = useState(currentTask.id ? new Date().valueOf() - currentTask.startTime.valueOf()  : 0);
+  const [buttonText, setButtonText] = useState(currentTask.id ? 'Stop' : 'Start');
 
   const [dialogOpen, setDialogOpen] = React.useState(false);
 
   useEffect(() => {
+    if (currentTask.id) {
+      interval = setInterval(() => {
+        setCounter(new Date().valueOf() - currentTask.startTime.valueOf());
+      }, 1000)
+      taskNameInputRef.current.value = currentTask.name || '';
+    }
     return () => {
       clearInterval(interval);
     }
-  }, [])
+  }, [currentTask.id, currentTask.name, currentTask.startTime])
 
   const onButtonClick = useCallback(() => {
     if (buttonText === 'Start') {
-      taskNameInputRef.current.disabled = true;
       const startTime = new Date();
       startTimer({
         duration: 0,
