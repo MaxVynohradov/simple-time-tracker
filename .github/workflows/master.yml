@@ -1,0 +1,35 @@
+name: master-branch-ci
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+#   test:
+#     name: Test
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@v2
+#     - uses: actions/setup-node@master
+#     - name: Install Dependencies
+#       run: yarn
+#       env:
+#         CI: true
+#     - name: Run Tests
+#       run: yarn test
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    # needs: test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@master
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: build
+          BUILD_SCRIPT: yarn && yarn build
