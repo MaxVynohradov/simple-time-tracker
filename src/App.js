@@ -14,7 +14,7 @@ import InfoTabs from './components/InfoTabs';
 import NotFoundPage from './components/NotFoundPage';
 import TaskDetails from './components/TaskDetails';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   app: {
     display: 'flex',
     flexDirection: 'column',

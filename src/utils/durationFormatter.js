@@ -1,4 +1,4 @@
-const formatTimeUnit = (unit) => (unit < 10 ? `0${unit}` : `${unit}`);
+export const formatTimeUnit = (unit) => (unit < 10 ? `0${unit}` : `${unit}`);
 
 export const formatTimerCounter = (ms) => {
   const hours = Math.floor(ms / 3600000);

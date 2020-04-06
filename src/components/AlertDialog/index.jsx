@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -7,17 +7,16 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 
-import useStyles from './styles'
+import useStyles from './styles';
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+// eslint-disable-next-line react/jsx-props-no-spreading
+const Transition = forwardRef((props, ref) => (<Slide direction="up" ref={ref} {...props} />));
 
 export default ({ dialogOpen, setDialogOpen, taskNameInputRef }) => {
   const onClose = () => {
-    taskNameInputRef.current.disabled = false
-    setDialogOpen(false)
-  }
+    taskNameInputRef.current.disabled = false;
+    setDialogOpen(false);
+  };
   return (
     <Dialog
       open={dialogOpen}
@@ -39,6 +38,5 @@ export default ({ dialogOpen, setDialogOpen, taskNameInputRef }) => {
         </Button>
       </DialogActions>
     </Dialog>
-  )
+  );
 };
-
