@@ -14,19 +14,22 @@ import TaskDetailsPage from './pages/TaskDetailsPage';
 import MainPage from './pages/MainPage';
 
 
-import { DUMP_STORE_REQUEST } from './store/types';
+import { LOAD_STORE_REQUEST } from './store/types';
+import { saveState } from './localStorage';
 
 store.runSaga(rootSaga, store.dispatch);
+
+store.dispatch({ type: LOAD_STORE_REQUEST });
+
 
 function App() {
   useEffect(() => {
     // eslint-disable-next-line no-undef
     window.addEventListener('beforeunload', (ev) => {
       ev.preventDefault();
-      store.dispatch({ type: DUMP_STORE_REQUEST });
-      // saveState(store.getState());
+      saveState(store.getState());
     });
-  });
+  }, []);
 
   return (
     <Provider store={store}>

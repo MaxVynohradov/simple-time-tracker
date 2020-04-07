@@ -4,11 +4,9 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import logger from 'redux-logger';
 
 import {
-  START_TIMER, STOP_TIMER, DELETE_TASK, GENERATE_TASK,
-  LOAD_STORE, LOAD_STORE_REQUEST, DUMP_STORE_REQUEST,
+  START_TIMER, STOP_TIMER, DELETE_TASK, GENERATE_TASK, LOAD_STORE,
 } from './types';
 import generateTasks from '../utils/generateTasks';
-import { saveState } from '../localStorage';
 
 const initialState = {
   tasks: [],
@@ -35,7 +33,7 @@ const tasksReducer = (state = initialState, action) => {
     case GENERATE_TASK:
       return { ...state, tasks: generateTasks() };
     case LOAD_STORE:
-      return { ...state };
+      return { ...state, currentTask: action.currentTask, tasks: action.tasks };
     default:
       return { ...state };
   }
@@ -51,7 +49,5 @@ const store = createStore(
 );
 
 store.runSaga = sagaMiddleware.run;
-
-store.dispatch({ type: LOAD_STORE_REQUEST });
 
 export default store;
