@@ -1,7 +1,9 @@
-import { all, takeEvery, put, select } from 'redux-saga/effects';
+import {
+  all, takeEvery, put, select,
+} from 'redux-saga/effects';
 
 import {
-  LOAD_STORE, LOAD_STORE_REQUEST, DUMP_STORE, DUMP_STORE_REQUEST,
+  LOAD_STORE, LOAD_STORE_REQUEST, DUMP_STORE_REQUEST,
 } from '../store/types';
 
 import { loadState, saveState } from '../localStorage';

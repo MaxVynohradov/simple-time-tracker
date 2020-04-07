@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,9 +13,21 @@ import NotFoundPage from './pages/NotFoundPage';
 import TaskDetailsPage from './pages/TaskDetailsPage';
 import MainPage from './pages/MainPage';
 
+
+import { DUMP_STORE_REQUEST } from './store/types';
+
 store.runSaga(rootSaga, store.dispatch);
 
 function App() {
+  useEffect(() => {
+    // eslint-disable-next-line no-undef
+    window.addEventListener('beforeunload', (ev) => {
+      ev.preventDefault();
+      store.dispatch({ type: DUMP_STORE_REQUEST });
+      // saveState(store.getState());
+    });
+  });
+
   return (
     <Provider store={store}>
       <Router basename="/simple-time-tracker">

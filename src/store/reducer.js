@@ -54,12 +54,4 @@ store.runSaga = sagaMiddleware.run;
 
 store.dispatch({ type: LOAD_STORE_REQUEST });
 
-// eslint-disable-next-line no-undef
-window.addEventListener('beforeunload', (ev) => {
-  ev.preventDefault();
-  store.dispatch({ type: DUMP_STORE_REQUEST });
-  // saveState(store.getState());
-});
-
-
 export default store;
