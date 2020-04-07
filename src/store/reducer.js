@@ -5,7 +5,7 @@ import logger from 'redux-logger';
 
 import {
   START_TIMER, STOP_TIMER, DELETE_TASK, GENERATE_TASK,
-  LOAD_STORE, LOAD_STORE_REQUEST, DUMP_STORE, DUMP_STORE_REQUEST,
+  LOAD_STORE, LOAD_STORE_REQUEST, DUMP_STORE_REQUEST,
 } from './types';
 import generateTasks from '../utils/generateTasks';
 import { saveState } from '../localStorage';
@@ -57,7 +57,8 @@ store.dispatch({ type: LOAD_STORE_REQUEST });
 // eslint-disable-next-line no-undef
 window.addEventListener('beforeunload', (ev) => {
   ev.preventDefault();
-  saveState(store.getState());
+  store.dispatch({ type: DUMP_STORE_REQUEST });
+  // saveState(store.getState());
 });
 
 
