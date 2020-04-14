@@ -29,7 +29,8 @@
     "predeploy": "yarn run build",
     "deploy": "gh-pages -d build",
     "lint": "yarn eslint ./src",
-    "lint:fix": "yarn eslint ./src --fix"
+    "lint:fix": "yarn eslint ./src --fix",
+    "tests:cypress": "DEBUG=cypress:* yarn cypress open"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -47,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "cypress": "^4.3.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "^6.8.0",
