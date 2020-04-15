@@ -31,6 +31,7 @@
     "lint": "yarn eslint ./src ./cypress",
     "lint:fix": "yarn eslint ./src ./cypress --fix",
     "tests:cypress": "yarn cypress open",
+    "tests:cypress:ci": "yarn cypress run --record --parallel",
     "tests:cypress:debug": "DEBUG=cypress:* yarn cypress open"
   },
   "eslintConfig": {

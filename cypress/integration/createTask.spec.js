@@ -1,10 +1,11 @@
 // / <reference types="Cypress" />
 
 import {
-  getTableRows, getTaskNameInput, getTimerButton, getTimerClockFace, getAlertDialog,
+  getTableRows, getTaskNameInput, getTimerButton, getTimerClockFace,
+  getAlertDialog, getAlertDialogCloseBtn,
 } from '../pages/TasksPage';
 
-import { getTaskStore } from '../pages/ReduxStorePage';
+import { getTaskStore, resetStore } from '../pages/ReduxStorePage';
 
 const TASK_NAME1 = 'Test task 1';
 
@@ -76,7 +77,14 @@ describe('Task', () => {
       getTimerButton().click();
     });
 
-    context('when time is running', () => {
+    after(() => {
+      getAlertDialogCloseBtn().click();
+      getTaskNameInput().type(TASK_NAME1);
+      getTimerButton().click();
+      resetStore();
+    });
+
+    context('and when time is running', () => {
       before(() => getTimerButton().click());
 
       it('should show modal with error', () => {

@@ -4,13 +4,19 @@ import {
   getTableDefaultText, getTaskNameInput, getTimerButton, getTimerClockFace,
 } from '../pages/TasksPage';
 
-import { getTaskStore } from '../pages/ReduxStorePage';
+import { getTaskStore, resetStore } from '../pages/ReduxStorePage';
 
 describe('Tasks Page', () => {
   context('when loaded first time', () => {
     before(() => {
+      resetStore();
       cy.clearLocalStorageSnapshot();
       cy.visit(Cypress.env('BASE_URL'));
+    });
+
+    after(() => {
+      resetStore();
+      // cy.reload(true);
     });
 
     it('should be redirected to /tasks path', () => cy.url().should('include', '/tasks'));
@@ -34,8 +40,14 @@ describe('Tasks Page', () => {
     });
 
     describe('redux store', () => {
-      it('should have default Tasks Store', () => getTaskStore()
-        .should('deep.equal', { tasks: [], currentTask: { duration: 0 } }));
+      it('should have default Tasks Store', () => {
+        getTaskStore().its('currentTask').should((currentTask) => {
+          expect(currentTask.duration).to.be.equal(0);
+        });
+        getTaskStore().its('tasks').should((tasks) => {
+          expect(tasks).to.have.length(0);
+        });
+      });
     });
   });
 });

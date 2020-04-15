@@ -9,3 +9,5 @@ export const getTableDefaultText = () => cy.get('[data-test-id="empty-table-para
 export const getTableRows = () => cy.get('tbody>tr');
 
 export const getAlertDialog = () => cy.get('.MuiDialog-root');
+
+export const getAlertDialogCloseBtn = () => cy.get('.MuiDialog-root button');

@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import logger from 'redux-logger';
 
 import {
-  START_TIMER, STOP_TIMER, DELETE_TASK, GENERATE_TASK, LOAD_STORE,
+  START_TIMER, STOP_TIMER, DELETE_TASK, GENERATE_TASK, LOAD_STORE, RESET_STORE,
 } from './types';
 import generateTasks from '../utils/generateTasks';
 
@@ -34,6 +34,8 @@ const tasksReducer = (state = initialState, action) => {
       return { ...state, tasks: generateTasks() };
     case LOAD_STORE:
       return { ...state, currentTask: action.currentTask, tasks: action.tasks };
+    case RESET_STORE:
+      return { ...initialState };
     default:
       return { ...state };
   }
