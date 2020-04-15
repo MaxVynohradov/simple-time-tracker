@@ -2,13 +2,16 @@
 
 import {
   getTableDefaultText, getTaskNameInput, getTimerButton, getTimerClockFace,
-} from '../pages/tasks';
+} from '../pages/TasksPage';
 
-import { getTaskStore } from '../pages/reduxStore';
+import { getTaskStore } from '../pages/ReduxStorePage';
 
 describe('Tasks Page', () => {
   context('when loaded first time', () => {
-    before(() => cy.visit(Cypress.env('BASE_URL')));
+    before(() => {
+      cy.clearLocalStorageSnapshot();
+      cy.visit(Cypress.env('BASE_URL'));
+    });
 
     it('should be redirected to /tasks path', () => cy.url().should('include', '/tasks'));
 

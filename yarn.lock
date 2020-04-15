@@ -3837,6 +3837,11 @@ cypress-dotenv@^1.2.0:
     dotenv-parse-variables "^0.2.3"
     lodash.clonedeep "^2.0.0"
 
+cypress-localstorage-commands@^1.1.8:
+  version "1.1.8"
+  resolved "https://registry.npmjs.org/cypress-localstorage-commands/-/cypress-localstorage-commands-1.1.8.tgz#bca7593ad24e31630bb866f62b611530c586e510"
+  integrity sha512-/nb0crIq47C+V1vE74nE5BtenEmWG6cXZR9hwnUMWqpeCIHmXFUjDtA5Sq+OVbQoxIUyMese4fTzHdmJKOmdkA==
+
 cypress@4.4.0:
   version "4.4.0"
   resolved "https://registry.npmjs.org/cypress/-/cypress-4.4.0.tgz#566ac224e11601634c31e5648e5c15199dde7954"
