@@ -20,7 +20,9 @@ describe('Tasks Page', () => {
 
     after(() => resetStore());
 
-    it('is redirected to /tasks path', () => cy.url().should('include', '/tasks'));
+    it('is redirected to /tasks path', () => cy.location().should((loc) => {
+      expect(loc.pathname).to.eq('/simple-time-tracker/tasks');
+    }));
 
     describe(TIMER_TEXT_INPUT, () => {
       it('is focused on load', () => getTaskNameInput().should('have.focus'));
