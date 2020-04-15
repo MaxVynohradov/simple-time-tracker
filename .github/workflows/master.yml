@@ -23,11 +23,17 @@ jobs:
     - uses: cypress-io/github-action@v1
       with:
         start: yarn start
+        record: true
         config: pageLoadTimeout=100000,watchForFileChanges=false
         parallel: true
         browser: chrome
         headless: true
         group: 'simple-time-tracker'
+        ci-build-id: '${{ github.sha }}-${{ github.workflow }}-${{ github.event_name }}'
+      env:
+        # pass the Dashboard record key as an environment variable
+        CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
   deploy:
     name: Deploy
