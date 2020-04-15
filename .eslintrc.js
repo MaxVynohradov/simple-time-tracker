@@ -3,11 +3,10 @@ module.exports = {
     'airbnb',
     'plugin:cypress/recommended',
     'plugin:chai-friendly/recommended',
-    'json-format',
   ],
   parser: 'babel-eslint',
   rules: {
-    'semi': ['error'],
+    'semi': [2, "always"],
     'react/jsx-key': 2,
     'react/no-unused-prop-types': 2,
     'object-curly-spacing': ['error', 'always'],
@@ -25,6 +24,7 @@ module.exports = {
   plugins: [
     'cypress',
     'chai-friendly',
+    'json-format',
   ],
   env: {
     'cypress/globals': true
