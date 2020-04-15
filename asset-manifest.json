@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.js": "/simple-time-tracker/static/js/main.5d341b19.chunk.js",
+    "main.js.map": "/simple-time-tracker/static/js/main.5d341b19.chunk.js.map",
+    "runtime-main.js": "/simple-time-tracker/static/js/runtime-main.31c8a35f.js",
+    "runtime-main.js.map": "/simple-time-tracker/static/js/runtime-main.31c8a35f.js.map",
+    "static/js/2.5b89c0a9.chunk.js": "/simple-time-tracker/static/js/2.5b89c0a9.chunk.js",
+    "static/js/2.5b89c0a9.chunk.js.map": "/simple-time-tracker/static/js/2.5b89c0a9.chunk.js.map",
+    "index.html": "/simple-time-tracker/index.html",
+    "precache-manifest.3c01b6644ed9231e246b42f3d5804933.js": "/simple-time-tracker/precache-manifest.3c01b6644ed9231e246b42f3d5804933.js",
+    "service-worker.js": "/simple-time-tracker/service-worker.js",
+    "static/js/2.5b89c0a9.chunk.js.LICENSE.txt": "/simple-time-tracker/static/js/2.5b89c0a9.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.31c8a35f.js",
+    "static/js/2.5b89c0a9.chunk.js",
+    "static/js/main.5d341b19.chunk.js"
+  ]
+}
