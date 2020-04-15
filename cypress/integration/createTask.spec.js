@@ -4,8 +4,11 @@ import {
   getTableRows, getTaskNameInput, getTimerButton, getTimerClockFace,
   getAlertDialog, getAlertDialogCloseBtn,
 } from '../pages/TasksPage';
-
 import { getTaskStore, resetStore } from '../pages/ReduxStorePage';
+
+import {
+  TIMER_BUTTON, TIMER_CLOCK_FACE, TIMER_TEXT_INPUT, TASK_TABLE, REDUX_STORE,
+} from '../constants/pageObjects';
 
 const TASK_NAME1 = 'Test task 1';
 
@@ -20,11 +23,11 @@ describe('Task', () => {
     context('when time is running', () => {
       before(() => getTimerButton().click());
 
-      describe('Timer Clock Face', () => {
+      describe(TIMER_CLOCK_FACE, () => {
         it('started on button click', () => getTimerClockFace().should('not.have.text', '00:00:00'));
       });
 
-      describe('Timer Button', () => {
+      describe(TIMER_BUTTON, () => {
         it('has "Stop" text', () => getTimerButton().should('have.text', 'Stop'));
       });
     });
@@ -32,19 +35,19 @@ describe('Task', () => {
     context('when time is finished', () => {
       before(() => getTimerButton().click());
 
-      describe('Timer Clock Face', () => {
+      describe(TIMER_CLOCK_FACE, () => {
         it('has default value', () => getTimerClockFace().should('have.text', '00:00:00'));
       });
 
-      describe('Timer Button', () => {
+      describe(TIMER_BUTTON, () => {
         it('has "Start" text', () => getTimerButton().should('have.text', 'Start'));
       });
 
-      describe('Task Text Input', () => {
+      describe(TIMER_TEXT_INPUT, () => {
         it('is empty', () => getTaskNameInput().should('have.text', ''));
       });
 
-      describe('Task Table', () => {
+      describe(TASK_TABLE, () => {
         it('should have one task', () => {
           getTableRows().should('have.length', 1);
         });
@@ -54,7 +57,7 @@ describe('Task', () => {
         });
       });
 
-      describe('Redux Store', () => {
+      describe(REDUX_STORE, () => {
         it('has default proper state', () => {
           getTaskStore().its('currentTask').should((currentTask) => {
             expect(currentTask).to.deep.equal({ duration: 0 });
