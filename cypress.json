@@ -1,4 +1,5 @@
 {
+  "projectId": "STT-project",
   "watchForFileChanges": true,
   "restartBrowserBetweenSpecFiles": true
 }
