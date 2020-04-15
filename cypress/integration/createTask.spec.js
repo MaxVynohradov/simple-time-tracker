@@ -21,11 +21,11 @@ describe('Task', () => {
       before(() => getTimerButton().click());
 
       describe('Timer Clock Face', () => {
-        it('should be started on button click', () => getTimerClockFace().should('not.have.text', '00:00:00'));
+        it('started on button click', () => getTimerClockFace().should('not.have.text', '00:00:00'));
       });
 
       describe('Timer Button', () => {
-        it('should have "Stop" text', () => getTimerButton().should('have.text', 'Stop'));
+        it('has "Stop" text', () => getTimerButton().should('have.text', 'Stop'));
       });
     });
 
@@ -33,15 +33,15 @@ describe('Task', () => {
       before(() => getTimerButton().click());
 
       describe('Timer Clock Face', () => {
-        it('should be default value', () => getTimerClockFace().should('have.text', '00:00:00'));
+        it('has default value', () => getTimerClockFace().should('have.text', '00:00:00'));
       });
 
       describe('Timer Button', () => {
-        it('should have "Start" text', () => getTimerButton().should('have.text', 'Start'));
+        it('has "Start" text', () => getTimerButton().should('have.text', 'Start'));
       });
 
       describe('Task Text Input', () => {
-        it('should be empty', () => getTaskNameInput().should('have.text', ''));
+        it('is empty', () => getTaskNameInput().should('have.text', ''));
       });
 
       describe('Task Table', () => {
@@ -55,7 +55,7 @@ describe('Task', () => {
       });
 
       describe('Redux Store', () => {
-        it('should have default proper state', () => {
+        it('has default proper state', () => {
           getTaskStore().its('currentTask').should((currentTask) => {
             expect(currentTask).to.deep.equal({ duration: 0 });
           });
@@ -87,7 +87,7 @@ describe('Task', () => {
     context('and when time is running', () => {
       before(() => getTimerButton().click());
 
-      it('should show modal with error', () => {
+      it('shows modal with error', () => {
         getAlertDialog().should('have.css', 'visibility').and('match', /visible/);
       });
     });

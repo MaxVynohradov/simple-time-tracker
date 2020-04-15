@@ -4,4 +4,4 @@ export const getTaskStore = () => cy.window()
   .its('tasksStore');
 
 export const resetStore = () => cy.window().its('store')
-  .then(store => store.dispatch({ type: 'RESET_STORE' }));
+  .then((store) => store.dispatch({ type: 'RESET_STORE' }));
