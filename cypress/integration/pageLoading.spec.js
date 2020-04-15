@@ -13,7 +13,6 @@ import {
 describe('Tasks Page', () => {
   context('when loaded first time', () => {
     before(() => {
-      resetStore();
       cy.clearLocalStorageSnapshot();
       cy.visit(Cypress.env('BASE_URL'));
     });
