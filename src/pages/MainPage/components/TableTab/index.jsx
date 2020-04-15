@@ -54,7 +54,7 @@ function TableTab({ tasks, deleteTask }) {
                 <Button size="large" className={classes.btnWithShadow} onClick={onRemoveTaskBtnClick(id)}>Delete</Button>
               </TableCell>
             </TableRow>
-          )) : <p>Table Empty</p> }
+          )) : <p data-test-id="empty-table-paragraph">Table Empty</p> }
         </TableBody>
       </Table>
     </TableContainer>

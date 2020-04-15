@@ -79,12 +79,18 @@ const Timer = ({
         autoFocus
         inputRef={taskNameInputRef}
       />
-      <div className={classes.timerClock}>{formatTimerCounter(counter)}</div>
+      <div 
+        className={classes.timerClock} 
+        data-test-id="timer-clock-face" 
+      >
+        {formatTimerCounter(counter)}
+      </div>
       <Button
         color="primary"
         size="large"
         className={classes.stopBtn}
         onClick={onButtonClick}
+        data-test-id="timer-button"
       >
         {buttonText}
       </Button>
