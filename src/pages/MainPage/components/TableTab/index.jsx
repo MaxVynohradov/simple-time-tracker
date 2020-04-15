@@ -21,7 +21,10 @@ function TableTab({ tasks, deleteTask }) {
     [deleteTask],
   );
 
-  const onInfoTaskBtnClick = useCallback((e) => history.push(`/tasks/${e.target.closest('tr').getAttribute('id')}`), [history]);
+  const onInfoTaskBtnClick = useCallback(
+    (id) => () => history.push(`/tasks/${id}`),
+    [history],
+  );
 
   return (
     <TableContainer>
@@ -48,7 +51,7 @@ function TableTab({ tasks, deleteTask }) {
               <TableCell align="center">{ endTime.toTimeString().split(' ')[0] }</TableCell>
               <TableCell align="center">{ formatTimerCounter(duration) }</TableCell>
               <TableCell align="center">
-                <Button size="large" className={classes.btnWithShadow} onClick={onInfoTaskBtnClick}>Info</Button>
+                <Button size="large" className={classes.btnWithShadow} onClick={onInfoTaskBtnClick(id)}>Info</Button>
               </TableCell>
               <TableCell align="center">
                 <Button size="large" className={classes.btnWithShadow} onClick={onRemoveTaskBtnClick(id)}>Delete</Button>

@@ -1,4 +1,5 @@
-// / <reference types="Cypress" />
+// eslint-disable-next-line spaced-comment
+/// <reference types="Cypress" />
 
 import {
   getTableDefaultText, getTaskNameInput, getTimerButton, getTimerClockFace,

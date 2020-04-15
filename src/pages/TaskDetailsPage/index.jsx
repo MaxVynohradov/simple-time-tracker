@@ -19,7 +19,7 @@ function TaskDetailsPage({ tasks }) {
     id: taskId, name, duration, startTime, endTime,
   } = task;
   return (
-    <Paper class={classes.alignItemsAndJustifyContent}>
+    <Paper className={classes.alignItemsAndJustifyContent}>
       <h2>Task</h2>
       <List component="nav" aria-label="mailbox folders">
         <ListItem divider>

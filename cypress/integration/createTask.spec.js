@@ -1,4 +1,5 @@
-// / <reference types="Cypress" />
+// eslint-disable-next-line spaced-comment
+/// <reference types="Cypress" />
 
 import {
   getTableRows, getTaskNameInput, getTimerButton, getTimerClockFace,
@@ -12,7 +13,7 @@ import {
 
 const TASK_NAME1 = 'Test task 1';
 
-describe('Task', () => {
+describe('Task Processing', () => {
   context('when name of tasks exist', () => {
     before(() => {
       cy.clearLocalStorageSnapshot();
