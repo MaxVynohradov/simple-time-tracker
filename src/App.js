@@ -51,7 +51,7 @@ function App() {
 }
 
 if (window.Cypress) {
-  window.store = store
+  window.store = store;
 }
 
 export default App;
